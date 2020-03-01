@@ -9,6 +9,7 @@ function distance(a, b) {
 
 function Circle(game, theElement, isFusing) {
 	this.ele = theElement;
+	this.game = game;
 	this.energyCap = 10;
 	this.currentEnergy = 0;
     this.radius = 15;
@@ -111,10 +112,10 @@ Circle.prototype.draw = function (ctx) {
 };
 
 Circle.prototype.fuse = function() {
-	var rand = Math.random() * (3000 - 1) + 1;
+	var rand = Math.random() * (this.game.random - 1) + 1;
 	if (this.currentEnergy >= this.energyCap) {
 		//Fused
-		if (rand > 2999) {
+		if (rand > this.game.random - 1) {
 			if (this.ele == "Hydrogen") return "Helium";
 			else if (this.ele == "Helium") return "Oxygen";
 			else if (this.ele == "Oxygen") return  "Carbon";
@@ -132,40 +133,44 @@ var maxSpeed = 2000;
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./960px-Blank_Go_board.png");
-ASSET_MANAGER.queueDownload("./black.png");
-ASSET_MANAGER.queueDownload("./white.png");
+ASSET_MANAGER.queueDownload("./img/960px-Blank_Go_board.png");
+ASSET_MANAGER.queueDownload("./img/black.png");
+ASSET_MANAGER.queueDownload("./img/white.png");
 
-ASSET_MANAGER.downloadAll(function () {
-    var canvas = document.getElementById('gameWorld');
-    var ctx = canvas.getContext('2d');
+function start(value, energy) {
+	ASSET_MANAGER.downloadAll(function () {
+		var canvas = document.getElementById('gameWorld');
+		var ctx = canvas.getContext('2d');
 
-    var gameEngine = new GameEngine();
-	
-    for (var i = 0; i < 100; i++) {
-        circle = new Circle(gameEngine, "Hydrogen", false);
-        gameEngine.addEntity(circle);
-    };
-	for (var i = 0; i < 1; i++) {
-        circle = new Circle(gameEngine, "Helium", false);
-        gameEngine.addEntity(circle);
-	};
-	
-	// for (var i = 0; i < 7; i++) {
-        // circle = new Circle(gameEngine, "Oxygen", false);
-        // gameEngine.addEntity(circle);
+		var gameEngine = new GameEngine();
+		gameEngine.random = value;
+		gameEngine.totalEnergy = energy;
+		for (var i = 0; i < 100; i++) {
+			circle = new Circle(gameEngine, "Hydrogen", false);
+			gameEngine.addEntity(circle);
+		};
+		for (var i = 0; i < 1; i++) {
+			circle = new Circle(gameEngine, "Helium", false);
+			gameEngine.addEntity(circle);
+		};
+		
+		// for (var i = 0; i < 7; i++) {
+			// circle = new Circle(gameEngine, "Oxygen", false);
+			// gameEngine.addEntity(circle);
 
-	// };	
+		// };	
 
-	// for (var i = 0; i < 5; i++) {
-        // circle = new Circle(gameEngine, "Carbon", false);
-        // gameEngine.addEntity(circle);
+		// for (var i = 0; i < 5; i++) {
+			// circle = new Circle(gameEngine, "Carbon", false);
+			// gameEngine.addEntity(circle);
 
-	// };	
-	// for (var i = 0; i < 3; i++) {
-        // circle = new Circle(gameEngine, "Iron", false);
-        // gameEngine.addEntity(circle);
-	// };	
-    gameEngine.init(ctx);
-    gameEngine.start();
-});
+		// };	
+		// for (var i = 0; i < 3; i++) {
+			// circle = new Circle(gameEngine, "Iron", false);
+			// gameEngine.addEntity(circle);
+		// };	
+		gameEngine.init(ctx);
+		gameEngine.start();
+	});
+}
+// submitMe(3000);

@@ -41,6 +41,7 @@ function GameEngine() {
 	this.givenX = 0;
 	this.givenY = 0;
 	this.totalEnergy = 25000;
+	this.random = 0;
 }
 
 GameEngine.prototype.init = function (ctx) {
