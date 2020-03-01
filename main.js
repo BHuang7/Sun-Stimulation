@@ -133,9 +133,9 @@ var maxSpeed = 2000;
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/960px-Blank_Go_board.png");
-ASSET_MANAGER.queueDownload("./img/black.png");
-ASSET_MANAGER.queueDownload("./img/white.png");
+ASSET_MANAGER.queueDownload("./960px-Blank_Go_board.png");
+ASSET_MANAGER.queueDownload("./black.png");
+ASSET_MANAGER.queueDownload("./white.png");
 
 function start(value, energy) {
 	ASSET_MANAGER.downloadAll(function () {
