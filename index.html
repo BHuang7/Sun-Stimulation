@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Stimulation - Sun</title>
+    <script type="text/javascript" src="http://24.16.255.56:8888/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
     <script type="text/javascript" src="./main.js"></script>
@@ -16,6 +17,8 @@
 	<div> The amount of total energy </div>
 	<button onclick="start(theRandom.value, energy.value)" id="randBtn" >Submit</button>
     <div>Right click and "Inspect Element".  Select the Console Tab to see the debugger output.</div>
+	<button onclick="saveData()" id="saveBtn" >Save Data</button>
+	<button onclick="loadData()" id="loadBtn" >Load Data</button>
     <div>Key:</div>
 	<div>Red: Hydrogen, Green: Helium, Blue: Oxygen, Yellow: Carbon, White: Iron </div>
     <canvas id="gameWorld" width="1400" height="800" style="border: 1px solid white; background: black"></canvas>
